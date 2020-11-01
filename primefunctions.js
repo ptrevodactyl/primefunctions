@@ -18,3 +18,13 @@ function primeGen(num) {
 }
 
 console.log(primeGen(100));
+
+function cumulativeSum(nums) {
+  const sum = [nums[0]];
+  for (let i = 1; i < nums.length; i++) {
+    sum.push(sum[i - 1] + nums[i]);
+  }
+  return sum;
+}
+
+console.log(cumulativeSum([1, 2, 3, 4, 5, 6]));

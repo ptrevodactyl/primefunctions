@@ -27,4 +27,27 @@ function cumulativeSum(nums) {
   return sum;
 }
 
-console.log(cumulativeSum([1, 2, 3, 4, 5, 6]));
+console.log(cumulativeSum(primeGen(100)));
+
+function maxPrimeSum(num) {
+  const primeList = primeGen(num);
+  const primeSum = cumulativeSum(primeList);
+  let longestSum = 0;
+  let longestPrime = 2;
+  for (let i = 0; i < primeSum.length; i++) {
+    if (primeList.includes(primeSum[i]) && i + 1 > longestSum) {
+      longestSum = i + 1;
+      longestPrime = primeSum[i];
+    } else {
+      for (let j = i; j >= 0; j--) {
+        if (primeList.includes(primeSum[i] - primeSum[j]) && i - j > longestSum) {
+          longestSum = i - j;
+          longestPrime = primeSum[i] - primeSum[j];
+        }
+      }
+    }
+  }
+  return [longestPrime, longestSum];
+}
+
+console.log(maxPrimeSum(100));
